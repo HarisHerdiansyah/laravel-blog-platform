@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->uuid('media_id');
+            $table->uuid('media_id')->primary();
             $table->string('title', length: 255);
             $table->string('path', length: 255);
             $table->string('url', length: 255);
             $table->string('mimetype', length: 255);
             $table->integer('size')->between(0, 4096);
-            $table->timestamps('created_at')->useCurrent();
-            $table->timestamps('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamps();
         });
     }
 

@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->uuid('account_id')->primary();
-            $table->string('email', length: 255)->unique();
-            $table->string('password', length: 255);
-            $table->boolean('is_verified')->default(false);
+        Schema::create('categories', function (Blueprint $table) {
+            $table->uuid('category_id')->primary();
+            $table->string('name', length: 255);
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('categories');
     }
 };
