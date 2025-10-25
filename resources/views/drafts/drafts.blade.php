@@ -16,28 +16,7 @@
             </a>
         </div>
         <div class="posts">
-            <div class="post">
-                <article>
-                    <h2 class="text-serif">Disini judul artikel nantinya</h2>
-                    <p class="text-sans">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, similique?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, nisi!
-                    </p>
-                </article>
-                <aside>
-                    <div class="badge">STATUS</div>
-                    <div class="action">
-                        <a href="{{ route('drafts-form', ['mode' => 'edit']) }}">
-                            <button id="edit-btn">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                        </a>
-                        <button id="delete-btn">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </aside>
-            </div>
+            @include('partial.posts', ['posts' => $posts])
         </div>
     </section>
     <section class="draft-control">
@@ -51,12 +30,38 @@
         <div class="form-select">
             <label for="status">Status:</label>
             <select name="status" id="status">
-                <option value="-">All</option>
-                <option value="DRAFT">Draft</option>
-                <option value="PUBLISHED">Published</option>
+                <option value="all" {{ $filter === 'all' ? 'selected' : '' }}>All</option>
+                <option value="draft" {{ $filter === 'draft' ? 'selected' : '' }}>Draft</option>
+                <option value="published" {{ $filter === 'published' ? 'selected' : '' }}>Published</option>
             </select>
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdown = document.getElementById('status');
+
+        dropdown.addEventListener('change', function() {
+            const selectedFilter = this.value;
+            const url = new URL(window.location);
+            url.searchParams.set('filter', selectedFilter);
+            window.history.pushState({}, '', url);
+            fetchPosts(selectedFilter);
+        });
+
+        function fetchPosts(filter) {
+            fetch(`/drafts?filter=${filter}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+                .then(res => res.text())
+                .then(html => {
+                    document.querySelector('.posts').innerHTML = html;
+                })
+                .catch(err => console.error(err));
+        }
+    });
+</script>
+
 </body>
 </html>

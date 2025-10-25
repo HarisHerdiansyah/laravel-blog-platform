@@ -8,21 +8,42 @@ use App\Models\Categories;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Enum;
 
 class DraftController extends Controller
 {
-    public function show() {
-        return view('drafts.drafts');
+    public function show(Request $request)
+    {
+        $filter = $request->query('filter', 'all');
+
+        $query = Post::select('posts.post_id', 'posts.title', 'posts.summary', 'posts.status')
+            ->where('posts.user_id', Auth::user()->user->user_id);
+
+        if ($filter !== 'all') {
+            $query->where('posts.status', $filter);
+        }
+
+        $posts = $query->get();
+
+        if ($request->ajax()) {
+            return view('partial.posts', ['posts' => $posts]);
+        }
+
+        return view('drafts.drafts', [
+            'posts' => $posts,
+            'filter' => $filter
+        ]);
     }
 
-    public function create($mode) {
+    public function create($mode)
+    {
         $categories = Categories::select('category_id', 'name')->get();
         return view('drafts.drafts-form', ['mode' => $mode, 'categories' => $categories]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'category_id' => 'required|string|exists:categories,category_id',
             'title' => 'required|string|max:255',
@@ -52,7 +73,11 @@ class DraftController extends Controller
         ]);
     }
 
-    public function update() {}
+    public function update()
+    {
+    }
 
-    public function destroy() {}
+    public function destroy()
+    {
+    }
 }

@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('drafts') }}">
+                        <a href="{{ route('drafts', ['filter' => 'all']) }}">
                             <i class="fa-solid fa-newspaper"></i>Drafts
                         </a>
                     </li>

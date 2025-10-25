@@ -87,9 +87,9 @@ select:focus {
 .badge {
     background-color: #697565;
     color: #F9F3EF;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 1rem;
     border-radius: 1rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
     width: fit-content;
 }
 
