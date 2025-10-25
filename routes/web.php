@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/drafts', [DraftController::class, 'show'])->name('drafts');
     Route::post('/drafts', [DraftController::class, 'store'])->name('drafts.store');
     Route::get('/drafts/{mode}', [DraftController::class, 'create'])->name('drafts-form');
+    Route::delete('/drafts/{postId}', [DraftController::class, 'destroy'])->name('drafts-form.destroy');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
 

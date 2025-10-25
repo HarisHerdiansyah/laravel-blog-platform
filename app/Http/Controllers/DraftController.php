@@ -39,6 +39,7 @@ class DraftController extends Controller
     public function create($mode)
     {
         $categories = Categories::select('category_id', 'name')->get();
+        Log::info('Creating draft in mode: ' . $mode);
         return view('drafts.drafts-form', ['mode' => $mode, 'categories' => $categories]);
     }
 
@@ -77,7 +78,14 @@ class DraftController extends Controller
     {
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $postId = $request->route('postId');
+        $post = Post::where('post_id', $postId)
+            ->where('user_id', Auth::user()->user->user_id)
+            ->first();
+
+        $post->delete();
+        return $this->show($request);
     }
 }
