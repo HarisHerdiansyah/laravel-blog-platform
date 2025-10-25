@@ -6,14 +6,15 @@
 <main>
     <section>
         <h1 class="text-serif">Blog Platform | Login</h1>
-        <form>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
             <div class="form-control">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" required />
             </div>
             <div class="form-control">
                 <label for="password">Password:</label>
-                <input type="email" name="email" id="email" required/>
+                <input type="password" name="password" id="password" required/>
             </div>
             <a href="{{ route('register-form') }}">I don't have any account yet</a>
             <button type="submit">
