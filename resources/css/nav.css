@@ -1,0 +1,90 @@
+nav {
+    width: 100%;
+    background-color: #1E201E;
+    padding: 1rem 10rem;
+    color: #F9F3EF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+aside {
+    position: relative;
+}
+
+aside > .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #F9F3EF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.avatar .fa-user {
+    color: #3C3D37;
+    font-size: 1.5rem;
+}
+
+.popover {
+    position: absolute;
+    right: 0;
+    width: 180px;
+    padding: 0.5rem;
+    border: 1px solid #1E201E;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    color: #1E201E;
+    display: none;
+}
+
+.popover ul li {
+    list-style: none;
+    padding: 0.5rem;
+    border-bottom: 1px solid #1E201E;
+    cursor: pointer;
+    font-size: 1.15rem;
+    border-radius: 4px;
+}
+
+.popover ul li:hover {
+    color: #F9F3EF;
+    background-color: #3C3D37;
+}
+
+.popover ul li:last-child {
+    border-bottom: none;
+}
+
+.popover ul li i {
+    margin-right: 0.7rem;
+}
+
+.popover ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.visible {
+    display: block;
+}
+
+#logout-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #3C3D37;
+    color: #F9F3EF;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Source Serif 4 ', serif;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+#logout-btn i {
+    margin-right: 0.5rem;
+}
