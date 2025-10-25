@@ -22,6 +22,10 @@ class User extends Model
         return $this->belongsTo(Account::class, 'account_id', 'account_id');
     }
 
+    public function posts() {
+        return $this->hasMany(Post::class, 'user_id', 'user_id');
+    }
+
     protected static function boot() {
         parent::boot();
 

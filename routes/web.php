@@ -19,7 +19,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/drafts', [DraftController::class, 'show'])->name('drafts');
-    Route::get('/drafts/{mode}', [DraftController::class, 'showForm'])->name('drafts-form');
+    Route::post('/drafts', [DraftController::class, 'store'])->name('drafts.store');
+    Route::get('/drafts/{mode}', [DraftController::class, 'create'])->name('drafts-form');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
 
